@@ -4,6 +4,13 @@ namespace App\Services;
 
 class LinksGenerator {
 
+    /**
+     * gera links para o header da resposta
+     * @param string $tipo
+     * @param string $url
+     * @param string $rel
+     * @return void
+     */
     private array $links = [];
 
     private function add(string $tipo, string $url, string $rel): void
@@ -33,5 +40,10 @@ class LinksGenerator {
     public function delete(string $url, string $rel)
     {
         $this->add('DELETE', $url, $rel);
+    }
+
+    public function toArray():array
+    {
+        return $this->links;
     }
 }
