@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AlunoResource;
 use App\Models\Aluno;
 use Illuminate\Http\Response;
 use App\Http\Requests\AlunoRequest;
+use App\Http\Resources\AlunoCollection;
 use Illuminate\Database\Eloquent\Collection;
 
 class AlunoController extends Controller
@@ -12,9 +14,9 @@ class AlunoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Collection
+    public function index(): AlunoCollection
     {
-        return Aluno::get();
+        return new AlunoCollection(Aluno::paginate(2));
     }
 
     /**
@@ -31,9 +33,9 @@ class AlunoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Aluno $aluno): Aluno
+    public function show(Aluno $aluno): AlunoResource
     {
-        return $aluno;
+        return new AlunoResource($aluno);
     }
 
     /**
